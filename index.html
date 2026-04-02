@@ -1,1 +1,430 @@
-placeholder
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ìíì± | HyeonChae Im â Ceramic 3D Printing Researcher</title>
+  <style>
+    :root{--navy:#0d1f35;--blue:#1a3a5c;--mid:#2e6da4;--acc:#3b9eff;--gold:#f5c842;--light:#f0f5fb;--white:#fff;--text:#1e293b;--muted:#64748b;--border:#dde6f0;--r:14px;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Segoe UI','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--light);color:var(--text);line-height:1.75;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,31,53,.96);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:60px;border-bottom:1px solid rgba(255,255,255,.08);}
+    .nav-logo{color:#fff;font-weight:800;font-size:1.1rem;letter-spacing:1.5px;text-decoration:none;}
+    .nav-links{display:flex;gap:1.6rem;list-style:none;}
+    .nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.86rem;font-weight:500;transition:color .2s;}
+    .nav-links a:hover{color:#7ec8ff;}
+
+    #hero{min-height:100vh;padding-top:60px;background:linear-gradient(140deg,#08172a 0%,#0d2640 40%,#14395e 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+    .bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,158,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,158,255,.06) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+    .hero-wrap{position:relative;z-index:2;display:flex;align-items:center;gap:3.5rem;padding:3rem 6%;max-width:960px;width:100%;}
+    .avatar{flex-shrink:0;width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#2e6da4,#3b9eff);padding:4px;box-shadow:0 0 0 8px rgba(59,158,255,.18),0 0 50px rgba(59,158,255,.3);}
+    .avatar-inner{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a5c,#0d2640);display:flex;align-items:center;justify-content:center;font-size:4rem;}
+    .hero-text{color:#fff;}
+    .hero-kr{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;letter-spacing:4px;margin-bottom:.1rem;}
+    .hero-en{font-size:.95rem;color:rgba(255,255,255,.45);letter-spacing:3px;margin-bottom:1.2rem;}
+    .badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem;}
+    .badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:.32rem .9rem;font-size:.8rem;backdrop-filter:blur(6px);}
+    .badge.gold{background:rgba(245,200,66,.12);border-color:rgba(245,200,66,.4);color:var(--gold);}
+    .hero-desc{color:rgba(255,255,255,.68);font-size:.95rem;max-width:460px;margin-bottom:1.8rem;line-height:1.8;}
+    .btns{display:flex;gap:.7rem;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1.5rem;border-radius:999px;font-size:.88rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+    .btn:hover{transform:translateY(-2px);}
+    .btn-blue{background:var(--acc);color:#fff;box-shadow:0 4px 18px rgba(59,158,255,.4);}
+    .btn-ghost{border:2px solid rgba(255,255,255,.3);color:#fff;}
+    .btn-ghost:hover{background:rgba(255,255,255,.1);}
+
+    section{padding:4.5rem 6%;}
+    .inner{max-width:900px;margin:0 auto;}
+    .sec-head{margin-bottom:2.4rem;}
+    .sec-title{font-size:1.65rem;font-weight:800;color:var(--blue);display:inline-block;margin-bottom:.35rem;}
+    .sec-title::after{content:'';display:block;height:4px;width:44px;border-radius:2px;margin-top:5px;background:linear-gradient(90deg,var(--mid),var(--acc));}
+    .sec-sub{color:var(--muted);font-size:.92rem;}
+
+    #about{background:var(--white);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem;}
+    .about-p{font-size:.97rem;color:var(--text);margin-bottom:.8rem;}
+    .info-table{width:100%;border-collapse:collapse;}
+    .info-table tr{border-bottom:1px solid var(--border);}
+    .info-table tr:last-child{border-bottom:none;}
+    .info-table td{padding:.55rem .3rem;font-size:.9rem;vertical-align:middle;}
+    .info-table td:first-child{color:var(--muted);width:2rem;text-align:center;}
+    .info-table td:nth-child(2){color:var(--muted);width:80px;font-size:.8rem;}
+    .info-table td:last-child{font-weight:600;}
+    .info-table a{color:var(--mid);text-decoration:none;}
+    .info-table a:hover{text-decoration:underline;}
+
+    #awards{background:var(--light);}
+    .awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;}
+    .award-card{background:var(--white);border-radius:var(--r);padding:1.5rem;border:1px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;}
+    .award-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.09);}
+    .award-card.gold::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#f0a500);}
+    .award-card.blue::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mid),var(--acc));}
+    .award-icon{font-size:1.8rem;margin-bottom:.6rem;}
+    .award-rank{font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:.35rem;}
+    .award-rank.gold{color:var(--gold);}
+    .award-rank.blue{color:var(--mid);}
+    .award-title{font-size:.97rem;font-weight:700;margin-bottom:.35rem;}
+    .award-org{font-size:.83rem;color:var(--muted);margin-bottom:.25rem;}
+    .award-date{font-size:.78rem;color:var(--acc);font-weight:600;}
+
+    #education{background:var(--white);}
+    .timeline{position:relative;padding-left:2rem;}
+    .timeline::before{content:'';position:absolute;left:4px;top:8px;bottom:8px;width:3px;background:linear-gradient(to bottom,var(--mid),var(--acc));border-radius:2px;}
+    .tl-item{position:relative;margin-bottom:1.8rem;}
+    .tl-dot{position:absolute;left:-2.3rem;top:.3rem;width:14px;height:14px;border-radius:50%;background:var(--acc);border:3px solid var(--white);box-shadow:0 0 0 3px var(--acc);}
+    .tl-dot.now{background:var(--gold);box-shadow:0 0 0 3px var(--gold);}
+    .tl-card{background:var(--light);border-radius:var(--r);padding:1.2rem 1.5rem;border:1px solid var(--border);transition:transform .2s,box-shadow .2s;}
+    .tl-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.07);}
+    .tl-period{font-size:.76rem;font-weight:700;color:var(--acc);letter-spacing:.5px;margin-bottom:.2rem;}
+    .tl-period.now{color:var(--gold);}
+    .tl-org{font-size:1rem;font-weight:700;margin-bottom:.15rem;}
+    .tl-sub{font-size:.85rem;color:var(--muted);margin-bottom:.4rem;}
+    .tl-desc{font-size:.9rem;color:var(--text);}
+    .tl-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem;}
+    .tl-tag{background:var(--white);border:1px solid var(--border);border-radius:999px;padding:.18rem .65rem;font-size:.76rem;color:var(--muted);}
+
+    #research{background:var(--light);}
+    .r-banner{background:linear-gradient(120deg,var(--navy),var(--blue));border-radius:var(--r);padding:1.8rem 2.2rem;margin-bottom:1.8rem;color:#fff;display:flex;align-items:center;gap:1.2rem;}
+    .r-banner-icon{font-size:2.5rem;}
+    .r-banner h3{font-size:1.15rem;font-weight:800;margin-bottom:.25rem;}
+    .r-banner p{font-size:.88rem;color:rgba(255,255,255,.68);}
+    .r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem;}
+    .r-card{background:var(--white);border-radius:var(--r);padding:1.3rem;border:1px solid var(--border);transition:transform .2s,box-shadow .2s,border-color .2s;}
+    .r-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(59,158,255,.1);border-color:var(--acc);}
+    .r-icon{font-size:1.6rem;margin-bottom:.6rem;}
+    .r-title{font-size:.92rem;font-weight:700;color:var(--blue);margin-bottom:.28rem;}
+    .r-desc{font-size:.82rem;color:var(--muted);line-height:1.6;}
+
+    #skills{background:var(--white);}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.8rem;}
+    .sg-title{font-size:.78rem;font-weight:700;color:var(--acc);letter-spacing:1px;text-transform:uppercase;margin-bottom:.8rem;}
+    .tag-list{display:flex;flex-wrap:wrap;gap:.4rem;}
+    .tag{background:var(--light);border:1px solid var(--border);border-radius:999px;padding:.25rem .8rem;font-size:.82rem;color:var(--text);font-weight:500;transition:background .2s,color .2s;}
+    .tag:hover{background:var(--mid);color:#fff;border-color:var(--mid);}
+    .tag.hi{background:rgba(59,158,255,.1);border-color:rgba(59,158,255,.35);color:var(--mid);}
+
+    #contact{background:linear-gradient(135deg,#08172a 0%,#0d2640 100%);}
+    #contact .sec-title{color:#fff;}
+    #contact .sec-sub{color:rgba(255,255,255,.5);}
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem;}
+    .c-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:var(--r);padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.8rem;text-decoration:none;color:#fff;transition:background .2s,transform .2s;}
+    .c-card:hover{background:rgba(255,255,255,.13);transform:translateY(-3px);}
+    .c-icon{font-size:1.6rem;flex-shrink:0;}
+    .c-label{font-size:.73rem;color:rgba(255,255,255,.48);margin-bottom:.1rem;}
+    .c-val{font-size:.87rem;font-weight:600;word-break:break-all;}
+
+    footer{background:#060f1c;color:rgba(255,255,255,.32);text-align:center;padding:1.2rem;font-size:.78rem;}
+
+    .fade{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+    .fade.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:700px){
+      .hero-wrap{flex-direction:column;text-align:center;gap:1.8rem;}
+      .badges{justify-content:center;}
+      .btns{justify-content:center;}
+      .about-grid{grid-template-columns:1fr;}
+      .nav-links{display:none;}
+      section{padding:3rem 5%;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">ìíì±</a>
+  <ul class="nav-links">
+    <li><a href="#about">ìê°</a></li>
+    <li><a href="#awards">ìì</a></li>
+    <li><a href="#education">íë ¥/ê²½ë ¥</a></li>
+    <li><a href="#research">ì°êµ¬</a></li>
+    <li><a href="#skills">ì¤í¬</a></li>
+    <li><a href="#contact">ì°ë½ì²</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="bg-grid"></div>
+  <div class="hero-wrap">
+    <div class="avatar">
+      <div class="avatar-inner">ð§ª</div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-kr">ì í ì±</div>
+      <div class="hero-en">HYEONCHAE IM</div>
+      <div class="badges">
+        <span class="badge">ð íêµ­ì¬ë£ì°êµ¬ì íìì°êµ¬ì</span>
+        <span class="badge">ð UST ëíìì</span>
+        <span class="badge gold">ð 1st Runner-Up Â· Suranaree Univ., Thailand 2025</span>
+      </div>
+      <p class="hero-desc">
+        ì¸ë¼ë¯¹ ì ì¸µ ì ì¡°(Ceramic Additive Manufacturing) ë¶ì¼ ì°êµ¬ì.<br>
+        DLP ê´ì¤í© ê¸°ë° ì¸ë¼ë¯¹ 3D íë¦°í ê³µì  ìµì íì ìê²° í¹ì± ì°êµ¬ì ì§ì¤íê³  ììµëë¤.
+      </p>
+      <div class="btns">
+        <a class="btn btn-blue" href="#research">ì°êµ¬ ë¶ì¼ ë³´ê¸°</a>
+        <a class="btn btn-ghost" href="https://github.com/imchae1117" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="sec-title">About</div>
+      <div class="sec-sub">ìê°</div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p class="about-p">ìëíì¸ì! ì ë <strong>íêµ­ì¬ë£ì°êµ¬ì(KIMS)</strong> íìì°êµ¬ì ìíì±ìëë¤.</p>
+        <p class="about-p">ê²½ìêµ­ë¦½ëíêµë¥¼ ì¡¸ìíê³  íì¬ <strong>UST(ê³¼íê¸°ì ì°í©ëíìëíêµ)</strong> ëíìì ì¬í ì¤ì´ë©°, KIMS ì¸ë¼ë¯¹ ì°êµ¬íìì DLP ê¸°ë° ì¸ë¼ë¯¹ 3D íë¦°í ì°êµ¬ë¥¼ ìííê³  ììµëë¤.</p>
+        <p class="about-p">ê´ì¤í© ê¸°ë° ì±í ê³µì , íì§Â·ìê²° ìµì í, ê³ í¬ëª ì¸ë¼ë¯¹ ì ì ë±ì ì°êµ¬ ì£¼ì ë¡ ì¼ê³  ììµëë¤.</p>
+      </div>
+      <div>
+        <table class="info-table">
+          <tr><td>ð</td><td>ìì</td><td>íêµ­ì¬ë£ì°êµ¬ì (KIMS)</td></tr>
+          <tr><td>ð</td><td>ëíì</td><td>UST (ê³¼íê¸°ì ì°í©ëíì)</td></tr>
+          <tr><td>ð«</td><td>íë¶</td><td>ê²½ìêµ­ë¦½ëíêµ</td></tr>
+          <tr><td>ð¬</td><td>ë¶ì¼</td><td>ì¸ë¼ë¯¹ 3D íë¦°í / ì ì¸µ ì ì¡°</td></tr>
+          <tr><td>âï¸</td><td>ì´ë©ì¼</td><td><a href="mailto:sck07147@kims.re.kr">sck07147@kims.re.kr</a></td></tr>
+          <tr><td>âï¸</td><td>ê°ì¸</td><td><a href="mailto:hyeonchaelim@gmail.com">hyeonchaelim@gmail.com</a></td></tr>
+          <tr><td>ð»</td><td>GitHub</td><td><a href="https://github.com/imchae1117" target="_blank">imchae1117</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="sec-title">Awards</div>
+      <div class="sec-sub">ìì ì´ë ¥</div>
+    </div>
+    <div class="awards-grid">
+      <div class="award-card gold fade">
+        <div class="award-icon">ð</div>
+        <div class="award-rank gold">1st Runner-Up</div>
+        <div class="award-title">ê¸ë¡ë² íë¡ì í¸ ê¸°ë° íìµ (GPBL)</div>
+        <div class="award-org">Suranaree University of Technology, Thailand</div>
+        <div class="award-date">2025ë 2ì</div>
+      </div>
+      <div class="award-card blue fade">
+        <div class="award-icon">ð</div>
+        <div class="award-rank blue">ì°ì í¬ì¤í° ì</div>
+        <div class="award-title">KJ íêµ­ì¸ë¼ë¯¹íí í¬ì¤í° ë°í</div>
+        <div class="award-org">íêµ­ì¸ë¼ë¯¹íí (KJ)</div>
+        <div class="award-date">ëíì ì¬í ì¤</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CAREER -->
+<section id="education">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="sec-title">Education &amp; Career</div>
+      <div class="sec-sub">íë ¥ / ê²½ë ¥</div>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot now"></div>
+        <div class="tl-card">
+          <div class="tl-period now">2024 â íì¬</div>
+          <div class="tl-org">íêµ­ì¬ë£ì°êµ¬ì (KIMS)</div>
+          <div class="tl-sub">íìì°êµ¬ì Â· ì¸ë¼ë¯¹ì°êµ¬ë³¸ë¶</div>
+          <div class="tl-desc">DLP ê¸°ë° ì¸ë¼ë¯¹ 3D íë¦°í ê³µì  ì°êµ¬. ê´ì¤í© ì¬ë¬ë¦¬ ì¤ê³, íì§Â·ìê²° ìµì í, ê³ í¬ëª ì¸ë¼ë¯¹ ì ì¡°.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">ì¸ë¼ë¯¹ 3D íë¦°í</span>
+            <span class="tl-tag">DLP ê´ì¤í©</span>
+            <span class="tl-tag">ìê²° ìµì í</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot now"></div>
+        <div class="tl-card">
+          <div class="tl-period now">2024 â íì¬</div>
+          <div class="tl-org">UST (ê³¼íê¸°ì ì°í©ëíìëíêµ)</div>
+          <div class="tl-sub">ëíì ì¬í ì¤</div>
+          <div class="tl-desc">KIMS ìº í¼ì¤ ìì. ì¸ë¼ë¯¹ ì¬ë£ ë¶ì¼ ìì¬ ê³¼ì  ìí ì¤.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">ì¬ë£ê³µí</span>
+            <span class="tl-tag">ì¸ë¼ë¯¹</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">2018 â 2024</div>
+          <div class="tl-org">ê²½ìêµ­ë¦½ëíêµ (GNU)</div>
+          <div class="tl-sub">ì¬ë£ê³µíë¶ íì¬ ì¡¸ì</div>
+          <div class="tl-desc">ì¬ë£ê³µí ì ê³µ. íêµ­ ìë¼ëë¦¬ ê³µë GPBL ê¸ë¡ë² íë¡ê·¸ë¨ ì°¸ê°, íêµ­ì¸ë¼ë¯¹íí í¬ì¤í° ë°í.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">ì¬ë£ê³µí</span>
+            <span class="tl-tag">ì¸ë¼ë¯¹íí í¬ì¤í° ë°í</span>
+            <span class="tl-tag">ê¸ë¡ë² êµë¥ íë¡ê·¸ë¨</span>
+            <span class="tl-tag">OPIc</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="sec-title">Research Interests</div>
+      <div class="sec-sub">ì°êµ¬ ê´ì¬ ë¶ì¼</div>
+    </div>
+    <div class="r-banner fade">
+      <div class="r-banner-icon">ðª¨</div>
+      <div>
+        <h3>Ceramic Additive Manufacturing (ì¸ë¼ë¯¹ ì ì¸µ ì ì¡°)</h3>
+        <p>DLP ê´ì¤í© ê¸°ë° ì¸ë¼ë¯¹ 3D íë¦°í â ì¬ë¬ë¦¬ ì¤ê³Â·íì§Â·ìê²° ì  ê³µì  ì°êµ¬</p>
+      </div>
+    </div>
+    <div class="r-grid">
+      <div class="r-card fade">
+        <div class="r-icon">ð¡</div>
+        <div class="r-title">DLP ê´ì¤í© ì¸ë¼ë¯¹ 3D íë¦°í</div>
+        <div class="r-desc">Digital Light Processing(DLP)ì ì´ì©í ê´ì¤í© ê¸°ë° ì¸ë¼ë¯¹ ì±í ê³µì  ë° ì¬ë¬ë¦¬ ì¡°ì± ìµì í ì°êµ¬.</div>
+      </div>
+      <div class="r-card fade">
+        <div class="r-icon">ð¥</div>
+        <div class="r-title">ìê²° ì¬ë£ í¹ì± ì°êµ¬</div>
+        <div class="r-desc">ì§ë¥´ì½ëì(ZrOâ), ì´í¸ë¦¬ì(YâOâ) ë± ì°íë¬¼ ì¸ë¼ë¯¹ì ìê²° í¹ì± ë° ë¯¸ì¸ êµ¬ì¡° ë¶ì ì°êµ¬.</div>
+      </div>
+      <div class="r-card fade">
+        <div class="r-icon">ð¡</div>
+        <div class="r-title">íì§Â·ìê²° ê³µì  ìµì í</div>
+        <div class="r-desc">ì´ì²ë¦¬ ê³µì (TGA/DSC) ë¶ìê³¼ ë¬´ê²°í¨ íì§ë¥¼ ìí ë¹ë°ìì± í¬ìì  ì ì© 3D ì¸ë¼ë¯¹ ìê²° ì°êµ¬.</div>
+      </div>
+      <div class="r-card fade">
+        <div class="r-icon">ð¦·</div>
+        <div class="r-title">ì´í¸ë¦¬ì ì¸ë¼ë¯¹</div>
+        <div class="r-desc">ê³ í¬ëª ì´í¸ë¦¬ì(YâOâ) ì¸ë¼ë¯¹ ì ì¡° ë° í¬ëªë íê³ ê·¹ë³µì ìí DLP ê¸°ë° ì ì¸µ ì ì¡° ì°êµ¬.</div>
+      </div>
+      <div class="r-card fade">
+        <div class="r-icon">ð§«</div>
+        <div class="r-title">ë°ì´ì¤ì¸ë¼ë¯¹ / ì¡°ì§ê³µí</div>
+        <div class="r-desc">GelMA íì´ëë¡ê² ê¸°ë° ë°ì´ì¤ìí¬ ë° ì§ì§ì²´ ìë 3D ë°ì´ì¤ì¸ë¼ë¯¹ íë¦°í ì°êµ¬.</div>
+      </div>
+      <div class="r-card fade">
+        <div class="r-icon">ð¦·</div>
+        <div class="r-title">ì¹ê³¼ì© ì¸ë¼ë¯¹</div>
+        <div class="r-desc">ììÂ·í¬ëªë êµ¬ë°° ì§ë¥´ì½ëì ì¹ê³¼ì© ë³´ì² ë¬¼ DLP ê¸°ë° ì ì¡° ì°êµ¬ ë° ìì êµ¬ë°° ìì ë² ëì´ ì¡°ì± ì ì´.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="sec-title">Skills &amp; Tools</div>
+      <div class="sec-sub">ë³´ì  ê¸°ì  ë° ëêµ¬</div>
+    </div>
+    <div class="skills-grid">
+      <div class="fade">
+        <div class="sg-title">ðª¨ 3D íë¦°í / ì¸ë¼ë¯¹ ê³µì </div>
+        <div class="tag-list">
+          <span class="tag hi">DLP 3D Printing</span>
+          <span class="tag hi">Photopolymerization</span>
+          <span class="tag">Debinding</span>
+          <span class="tag">Sintering</span>
+          <span class="tag">Slurry ì¡°ì±</span>
+          <span class="tag">ì¸ë¼ë¯¹ ì±í</span>
+        </div>
+      </div>
+      <div class="fade">
+        <div class="sg-title">ð¬ ì¬ë£ ë¶ì</div>
+        <div class="tag-list">
+          <span class="tag">XRD</span>
+          <span class="tag">SEM</span>
+          <span class="tag">TEM</span>
+          <span class="tag">EDS</span>
+          <span class="tag">TGA / DSC</span>
+          <span class="tag">UTM</span>
+          <span class="tag">ê´ííë¯¸ê²½</span>
+        </div>
+      </div>
+      <div class="fade">
+        <div class="sg-title">ð» ë°ì´í° ë¶ì / ìíí¸ì¨ì´</div>
+        <div class="tag-list">
+          <span class="tag hi">Python</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Origin</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">MS Office</span>
+          <span class="tag">3D Slicer</span>
+        </div>
+      </div>
+      <div class="fade">
+        <div class="sg-title">ð ì¸ì´ / ì­ë</div>
+        <div class="tag-list">
+          <span class="tag hi">OPIc (ìì´)</span>
+          <span class="tag">êµ­ì  ë°í ê²½í</span>
+          <span class="tag">íí ë°í</span>
+          <span class="tag">ê¸ë¡ë² íì</span>
+          <span class="tag">ì¤í ë³´ê³ ì ìì±</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="sec-title">Contact</div>
+      <div class="sec-sub">ì¸ì ë ì§ í¸íê² ì°ë½ì£¼ì¸ì</div>
+    </div>
+    <div class="contact-grid">
+      <a class="c-card" href="mailto:sck07147@kims.re.kr">
+        <span class="c-icon">ð§</span>
+        <div><div class="c-label">KIMS ì´ë©ì¼</div><div class="c-val">sck07147@kims.re.kr</div></div>
+      </a>
+      <a class="c-card" href="mailto:hyeonchaelim@gmail.com">
+        <span class="c-icon">âï¸</span>
+        <div><div class="c-label">ê°ì¸ ì´ë©ì¼</div><div class="c-val">hyeonchaelim@gmail.com</div></div>
+      </a>
+      <a class="c-card" href="https://github.com/imchae1117" target="_blank">
+        <span class="c-icon">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </span>
+        <div><div class="c-label">GitHub</div><div class="c-val">github.com/imchae1117</div></div>
+      </a>
+      <a class="c-card" href="https://www.kims.re.kr" target="_blank">
+        <span class="c-icon">ð</span>
+        <div><div class="c-label">ìì ê¸°ê´</div><div class="c-val">íêµ­ì¬ë£ì°êµ¬ì (KIMS)</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>Â© 2026 ìíì± (HyeonChae Im) Â· íêµ­ì¬ë£ì°êµ¬ì íìì°êµ¬ì Â· UST ëíìì Â· Ceramic Additive Manufacturing</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
